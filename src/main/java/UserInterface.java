@@ -1,8 +1,9 @@
 import java.util.Scanner;
 
 public class UserInterface {
-    Scanner scanner = new Scanner(System.in);
-    Controller controller = new Controller();
+
+    private Scanner scanner;
+    private Controller controller;
 
     public void startProgram() {}
 }
