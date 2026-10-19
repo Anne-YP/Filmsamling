@@ -11,5 +11,5 @@ Et CRUD-program til en filmsamling – 1. semester, datamatiker, EK.
 | Ida | idabloust |
 
 | Fornavn | GitHub |
-iman | imansm01 |
+| Iman | imansm01 |
 
