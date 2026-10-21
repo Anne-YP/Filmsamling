@@ -3,24 +3,31 @@ import java.util.ArrayList;
 public class Controller {
    private MovieCollection movieCollection;
 
+    public Controller() {
+        movieCollection = new MovieCollection();
+    }
 
     public void addMovie (String title, String director, int yearCreated,
-                          boolean inColor, int lengthInMinutes, String genre) {}
+                          boolean inColor, int lengthInMinutes, String genre)
+    {
+        movieCollection.addMovie(title, director, yearCreated, inColor, lengthInMinutes, genre);
+    }
 
     public ArrayList<Movie> getMovies() {
-        return null;
+        return movieCollection.getMovies();
     }
 
     public ArrayList<Movie> searchMovies(String searchText) {
-        return null;
+        return movieCollection.searchMovies(searchText);
     }
 
     public boolean editMovie(Movie movie, String title, String director, int yearCreated,
                              boolean inColor, int lengthInMinutes, String genre) {
-        return false;
+        return movieCollection.editMovie(
+                movie, title, director, yearCreated, inColor, lengthInMinutes,genre);
     }
 
     public boolean deleteMovie(Movie movie) {
-        return false;
+        return movieCollection.deleteMovie(movie);
     }
 }
