@@ -7,6 +7,7 @@ public class Controller {
         movieCollection = new MovieCollection();
     }
 
+
     public void addMovie (String title, String director, int yearCreated,
                           boolean inColor, int lengthInMinutes, String genre)
     {
