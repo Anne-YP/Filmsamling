@@ -103,7 +103,8 @@ public class UserInterface {
         System.out.println("Søg efter titel: ");
         String searchText = scanner.nextLine();
         ArrayList<Movie> movies = controller.searchMovies(searchText);
-
-        System.out.println(movies);
+        for (Movie m : movies) {
+            System.out.println(m);
+        }
     }
 }
