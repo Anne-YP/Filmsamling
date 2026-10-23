@@ -36,24 +36,6 @@ public class UserInterface {
                 System.out.println("Ugyldigt valgt");
             }
         }
-
-
-//        switch (choice) {
-//            case "1" -> addMovie();
-//
-////            case "2" -> showAllMovies();
-////            case "3" -> searchMovies();
-////            case "4" -> editMovie();
-////            case "5" -> deleteMovie();
-//
-//            case "0" -> isRunning = false;
-//            System.out.println("Tak for denne gang!");
-//                break;
-
-//            running = false;
-//            default -> System.out.println("Ukendt valg: " + choice);
-
-
     }
 
     private void showMenu() {
@@ -97,14 +79,22 @@ public class UserInterface {
         for (Movie m: movies) {
             System.out.println(m);
         }
+        if (movies.isEmpty()) {
+            System.out.println("Listen er tom.");
+        }
     }
 
     private void searchMovies() {
         System.out.println("Søg efter titel: ");
         String searchText = scanner.nextLine();
         ArrayList<Movie> movies = controller.searchMovies(searchText);
-        for (Movie m : movies) {
-            System.out.println(m);
+        if (movies.isEmpty()) {
+            System.out.println("Film ikke fundet.");
+        }
+        else {
+            for (Movie m : movies) {
+                System.out.println(m);
+            }
         }
     }
 }
