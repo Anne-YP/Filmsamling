@@ -9,7 +9,9 @@ public class MovieCollection {
 
     //TODO US1
     public void addMovie (String title, String director, int yearCreated,
-                          boolean inColor, int lengthInMinutes, String genre) {}
+                          boolean inColor, int lengthInMinutes, String genre) {
+
+    }
 
     // TODO US3
     public ArrayList<Movie> getMovies() {
@@ -42,4 +44,18 @@ public class MovieCollection {
     public boolean deleteMovie(Movie movie) {
         return false;
     }
+
+//   Movie movie1 = new Movie("Tourist Trap", "David Schmoeller",
+//            1979, true, 90, "Horror/Thriller");
+//    Movie movie2 = new Movie("Tammy and the T-Rex", "Stewart Raffill",
+//            1994, true, 82, "Horror/Comedy");
+//    Movie movie3 = new Movie("Dogs", "Burt Brinckerhoff",
+//            1977, true, 90, "Horror");
+//    Movie movie4 = new Movie("Five Easy Pieces", "Bob Rafelson",
+//            1970, true, 98, "Thriller/Drama");
+//    Movie movie5 = new Movie("Slugs", "Juan Piquer Simón",
+//            1988, true, 92, "Horror");
+//    Movie movie6 = new Movie("Disgusting Spaceworms Eat Everyone!!", "Geaorge Keller",
+//            1989, true, 72, "Sci-Fi/Horror/Comedy");
+
 }

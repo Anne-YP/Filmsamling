@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Movie {
     private String title;
     private String director;
@@ -5,6 +7,9 @@ public class Movie {
     private boolean inColor;
     private int lengthInMinutes;
     private String genre;
+
+    private boolean watched;
+    private LocalDate lastWatchedDate;
 
     public Movie(String title, String director, int yearCreated,
                  boolean inColor, int lengthInMinutes, String genre) {
@@ -14,6 +19,9 @@ public class Movie {
         this.inColor = inColor;
         this.lengthInMinutes = lengthInMinutes;
         this.genre = genre;
+
+        this.watched = false;
+        this.lastWatchedDate = null;
     }
 
     //Getters
@@ -41,6 +49,14 @@ public class Movie {
         return genre;
     }
 
+    public boolean isWatched() {
+        return watched;
+    }
+
+    public LocalDate getLastWatchedDate() {
+        return lastWatchedDate;
+    }
+
     //Setters
     public void setTitle(String title) {
         this.title = title;
@@ -64,5 +80,34 @@ public class Movie {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public void markAsWatched() {
+        watched = true;
+        lastWatchedDate = LocalDate.now();
+    }
+
+    @Override
+    public String toString() {
+
+        String colorText = inColor ? "Farver" : "Sort-hvid";
+
+        String watchedText;
+        if(watched) {
+            watchedText = "Set";
+        }
+        else {
+            watchedText = "Ikke set";
+        }
+
+        return
+                "Titel: " + title +
+                        "\nInstruktør: " + director +
+                        "\nÅr: " + yearCreated +
+                        "\nLængde: " + lengthInMinutes +
+                        "\nGenre: " + genre +
+                        "\nFormat: " + colorText +
+                        "\nStatus: " + watchedText;
+
     }
 }
