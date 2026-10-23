@@ -104,10 +104,10 @@ public class Movie {
                 "Titel: " + title +
                         "\nInstruktør: " + director +
                         "\nÅr: " + yearCreated +
-                        "\nLængde: " + lengthInMinutes +
+                        "\nLængde: " + lengthInMinutes + " minutter" +
                         "\nGenre: " + genre +
                         "\nFormat: " + colorText +
-                        "\nStatus: " + watchedText;
+                        "\nStatus: " + watchedText + "\n";
 
     }
 }

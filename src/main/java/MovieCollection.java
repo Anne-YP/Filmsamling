@@ -10,12 +10,13 @@ public class MovieCollection {
     //TODO US1
     public void addMovie (String title, String director, int yearCreated,
                           boolean inColor, int lengthInMinutes, String genre) {
-
+        Movie movie = new Movie(title, director, yearCreated, inColor, lengthInMinutes, genre);
+        movies.add(movie);
     }
 
     // TODO US3
     public ArrayList<Movie> getMovies() {
-        return null;
+        return movies;
     }
 
     //TODO
