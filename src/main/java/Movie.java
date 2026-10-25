@@ -82,7 +82,7 @@ public class Movie {
         this.genre = genre;
     }
 
-    public void markAsWatched() {
+    public void setIsWatched() {
         watched = true;
         lastWatchedDate = LocalDate.now();
     }

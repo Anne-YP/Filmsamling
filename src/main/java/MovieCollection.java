@@ -43,7 +43,7 @@ public class MovieCollection {
 
     //TODO US6
     public boolean deleteMovie(Movie movie) {
-        return false;
+        return movies.remove(movie);
     }
 
 //   Movie movie1 = new Movie("Tourist Trap", "David Schmoeller",
