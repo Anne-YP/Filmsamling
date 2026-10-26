@@ -9,7 +9,6 @@ public class Movie {
     private int lengthInMinutes;
     private String genre;
 
-    private boolean hasBeenWatched;
     private LocalDate lastWatched;
 
     public Movie(String title, String director, int yearCreated,
@@ -21,7 +20,6 @@ public class Movie {
         this.lengthInMinutes = lengthInMinutes;
         this.genre = genre;
 
-        this.hasBeenWatched = false;
         this.lastWatched = null;
     }
 
@@ -97,7 +95,7 @@ public class Movie {
         String colorText = inColor ? "Farver" : "Sort-hvid";
 
         String watchedText;
-        if(hasBeenWatched) {
+        if(hasBeenWatched()) {
             watchedText = "Set";
         }
         else {
