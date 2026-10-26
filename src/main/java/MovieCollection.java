@@ -47,10 +47,17 @@ public class MovieCollection {
         return movies.remove(movie);
     }
 
-    public void getMoviesNotWatchedSince(LocalDate date) {
-        if(!movie.hasBeenWatched() || movie.getLastWatched().isBefore(date)) {
+    public ArrayList<Movie> getMoviesNotWatchedSince(LocalDate date) {
+        ArrayList<Movie> result = new ArrayList<>();
 
+        for(Movie movie : movies) {
+            if(!movie.hasBeenWatched() || movie.getLastWatched().isBefore(date)) {
+
+                result.add(movie);
+            }
         }
+
+        return result;
     }
 
 

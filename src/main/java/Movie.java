@@ -50,7 +50,7 @@ public class Movie {
         return genre;
     }
 
-    public boolean isHasBeenWatched() {
+    public boolean hasBeenWatched() {
         return lastWatched != null;
     }
 
