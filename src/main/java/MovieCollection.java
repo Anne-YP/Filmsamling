@@ -54,7 +54,6 @@ public class MovieCollection {
     }
 
 
-
 //   Movie movie1 = new Movie("Tourist Trap", "David Schmoeller",
 //            1979, true, 90, "Horror/Thriller");
 //    Movie movie2 = new Movie("Tammy and the T-Rex", "Stewart Raffill",
