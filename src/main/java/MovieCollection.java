@@ -47,6 +47,13 @@ public class MovieCollection {
         return movies.remove(movie);
     }
 
+    public void getMoviesNotWatchedSince(LocalDate date) {
+        if(!movie.hasBeenWatched() || movie.getLastWatched().isBefore(date)) {
+
+        }
+    }
+
+
 
 //   Movie movie1 = new Movie("Tourist Trap", "David Schmoeller",
 //            1979, true, 90, "Horror/Thriller");

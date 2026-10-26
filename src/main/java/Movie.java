@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Movie {
     private String title;
@@ -8,8 +9,8 @@ public class Movie {
     private int lengthInMinutes;
     private String genre;
 
-    private boolean watched;
-    private LocalDate lastWatchedDate;
+    private boolean hasBeenWatched;
+    private LocalDate lastWatched;
 
     public Movie(String title, String director, int yearCreated,
                  boolean inColor, int lengthInMinutes, String genre) {
@@ -20,8 +21,8 @@ public class Movie {
         this.lengthInMinutes = lengthInMinutes;
         this.genre = genre;
 
-        this.watched = false;
-        this.lastWatchedDate = null;
+        this.hasBeenWatched = false;
+        this.lastWatched = null;
     }
 
     //Getters
@@ -49,12 +50,12 @@ public class Movie {
         return genre;
     }
 
-    public boolean isWatched() {
-        return watched;
+    public boolean isHasBeenWatched() {
+        return lastWatched != null;
     }
 
-    public LocalDate getLastWatchedDate() {
-        return lastWatchedDate;
+    public LocalDate getLastWatched() {
+        return lastWatched;
     }
 
     //Setters
@@ -82,9 +83,12 @@ public class Movie {
         this.genre = genre;
     }
 
-    public void setIsWatched() {
-        watched = true;
-        lastWatchedDate = LocalDate.now();
+    public void markAsWatched(LocalDate date) {
+        lastWatched = date;
+    }
+
+    public long getDaysSinceWatched(LocalDate today) {
+        return ChronoUnit.DAYS.between(lastWatched, today);
     }
 
     @Override
@@ -93,7 +97,7 @@ public class Movie {
         String colorText = inColor ? "Farver" : "Sort-hvid";
 
         String watchedText;
-        if(watched) {
+        if(hasBeenWatched) {
             watchedText = "Set";
         }
         else {
