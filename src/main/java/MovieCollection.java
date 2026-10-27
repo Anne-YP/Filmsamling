@@ -21,9 +21,9 @@ public class MovieCollection {
     }
 
     //TODO
-    public int getNumberOfMovies() {
-        return 0;
-    }
+//    public int getNumberOfMovies() {
+//        return 0;
+//    }
 
     public ArrayList<Movie> searchMovies(String searchText) {
         ArrayList<Movie> matches = new ArrayList<>();
