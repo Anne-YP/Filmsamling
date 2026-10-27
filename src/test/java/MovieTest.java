@@ -1,6 +1,7 @@
-import jdk.jfr.DataAmount;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -84,14 +85,33 @@ class MovieTest {
         assertEquals("Action", movie.getGenre());
     }
 
-    @Disabled
     @Test
-    void isWatched() {
-    }
+    void hasBeenWatched() {
+            Movie movie = new Movie(
+                    "Batman",
+                    "Tim Burton",
+                    1989,
+                    true,
+                    126,
+                    "Action");
 
-    @Disabled
+            assertFalse(movie.hasBeenWatched());
+        }
+
     @Test
-    void getLastWatchedDate() {
+    void getLastWatched() {
+        Movie movie = new Movie(
+                "Batman",
+                "Tim Burton",
+                1989,
+                true,
+                126,
+                "Action");
+
+        LocalDate date = LocalDate.of(2026, 10, 26);
+        movie.markAsWatched(date);
+
+        assertEquals(date, movie.getLastWatched());
     }
 
     @Test
@@ -184,9 +204,36 @@ class MovieTest {
         assertEquals("Drama", movie.getGenre());
     }
 
-    @Disabled
     @Test
-    void setIsWatched() {
+    void markAsWatched() {
+        Movie movie = new Movie(
+                "Batman",
+                "Tim Burton",
+                1989,
+                true,
+                126,
+                "Action");
+
+        LocalDate date = LocalDate.of(2026, 10, 26);
+
+        movie.markAsWatched(date);
+
+        assertEquals(date, movie.getLastWatched());
+    }
+
+    @Test
+    void getDaysSinceWatched() {
+        Movie movie = new Movie(
+                "Batman",
+                "Tim Burton",
+                1989,
+                true,
+                126,
+                "Action");
+
+        movie.markAsWatched(LocalDate.of(2026, 10, 20));
+
+        assertEquals(6L, movie.getDaysSinceWatched(LocalDate.of(2026, 10, 26)));
     }
 
     @Disabled
