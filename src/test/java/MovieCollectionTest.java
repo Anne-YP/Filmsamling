@@ -36,7 +36,6 @@ class MovieCollectionTest {
         assertTrue(result.isEmpty());
     }
 
-
     @Test
     void addMovie() {
         collection.addMovie("Batman", "Tim Burton", 1989,
@@ -54,9 +53,6 @@ class MovieCollectionTest {
 
         assertEquals(4, movies.size());
     }
-
-
-
 
     @Test
     void editMovie() {
@@ -111,7 +107,6 @@ class MovieCollectionTest {
         assertFalse(result);
         assertEquals(3, collection.getMovies().size());
     }
-
 
     @Test
     void getMoviesNotWatchedSince() {
