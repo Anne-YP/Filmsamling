@@ -75,6 +75,23 @@ class MovieCollectionTest {
     }
 
     @Test
+    void editMovieNotFound() {
+        Movie movie = new Movie("Joker", "Todd Phillips", 2019,
+                true, 122, "Drama");
+
+        boolean result = collection.editMovie(movie, "New Title", "New Director", 2020,
+                false, 100, "Comedy");
+
+        assertFalse(result);
+
+        assertEquals("Joker", movie.getTitle());
+        assertEquals("Todd Phillips", movie.getDirector());
+        assertEquals(2019, movie.getYearCreated());
+        assertEquals(122, movie.getLengthInMinutes());
+        assertEquals("Drama", movie.getGenre());
+    }
+
+    @Test
     void deleteMovie() {
         Movie movie = collection.getMovies().get(0);
 

@@ -47,6 +47,10 @@ public class MovieCollection {
         movie.setLengthInMinutes(lengthInMinutes);
         movie.setGenre(genre);
 
+        if(!movies.contains(movie)) {
+            return false;
+        }
+
         return true;
     }
 
