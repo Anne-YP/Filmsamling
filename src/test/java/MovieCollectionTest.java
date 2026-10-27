@@ -2,6 +2,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,6 +29,13 @@ class MovieCollectionTest {
         assertEquals(2, result.size());
     }
 
+    @Test
+    void searchMoviesNoMatches() {
+        ArrayList<Movie> result = collection.searchMovies("Harry Potter");
+
+        assertTrue(result.isEmpty());
+    }
+
 
     @Test
     void addMovie() {
@@ -48,23 +56,68 @@ class MovieCollectionTest {
     }
 
 
-    @Disabled
-    @Test
-    void searchMovies() {
-    }
 
-    @Disabled
+
     @Test
     void editMovie() {
+        Movie movie = collection.getMovies().get(0);
+
+        boolean result = collection.editMovie(movie,"Joker", "Todd Phillips", 2019,
+                true, 122, "Drama");
+
+        assertTrue(result);
+
+        assertEquals("Joker", movie.getTitle());
+        assertEquals("Todd Phillips", movie.getDirector());
+        assertEquals(2019, movie.getYearCreated());
+        assertEquals(122, movie.getLengthInMinutes());
+        assertEquals("Drama", movie.getGenre());
     }
 
-    @Disabled
     @Test
     void deleteMovie() {
+        Movie movie = collection.getMovies().get(0);
+
+        boolean result = collection.deleteMovie(movie);
+
+        assertTrue(result);
+        assertEquals(2, collection.getMovies().size());
     }
 
-    @Disabled
+    @Test
+    void deleteMovieNotFound() {
+        Movie movie = new Movie("Batman", "Tim Burton", 1989,
+                true, 126, "Action");
+
+        boolean result = collection.deleteMovie(movie);
+
+        assertFalse(result);
+        assertEquals(3, collection.getMovies().size());
+    }
+
+
     @Test
     void getMoviesNotWatchedSince() {
+
+        Movie movie1 = collection.getMovies().get(0);
+        Movie movie2 = collection.getMovies().get(1);
+
+        movie1.markAsWatched(LocalDate.of(2026, 10, 20));
+        movie2.markAsWatched(LocalDate.of(2026, 10, 25));
+
+        ArrayList<Movie> result = collection.getMoviesNotWatchedSince(LocalDate.of(2026, 10, 22));
+        assertEquals(2, result.size());
+    }
+
+    @Test
+    void getMoviesNotWatchedSinceNoMatches() {
+
+        for(Movie movie : collection.getMovies()) {
+            movie.markAsWatched(LocalDate.of(2026, 10, 25));
+        }
+
+        ArrayList<Movie> result = collection.getMoviesNotWatchedSince(LocalDate.of(2026, 10, 20));
+
+        assertTrue(result.isEmpty());
     }
 }

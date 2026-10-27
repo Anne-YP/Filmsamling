@@ -39,7 +39,15 @@ public class MovieCollection {
     //TODO US5
     public boolean editMovie(Movie movie, String title, String director, int yearCreated,
                              boolean inColor, int lengthInMinutes, String genre) {
-        return false;
+
+        movie.setTitle(title);
+        movie.setDirector(director);
+        movie.setYearCreated(yearCreated);
+        movie.setInColor(inColor);
+        movie.setLengthInMinutes(lengthInMinutes);
+        movie.setGenre(genre);
+
+        return true;
     }
 
     //TODO US6
