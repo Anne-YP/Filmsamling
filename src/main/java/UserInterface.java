@@ -217,8 +217,6 @@ public class UserInterface {
             selectedMovie.setDirector(newDirector);
         }
 
-        int choiceYear = 0;
-        boolean validInputYear = false;
 
         System.out.println("Nuværende årstal: " + selectedMovie.getYearCreated());
         System.out.println("Nyt årstal (tryk 'Enter' for at beholde årstal): ");
