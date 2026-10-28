@@ -186,7 +186,13 @@ public class UserInterface {
                     return;
                 }
 
-                validInput = true;
+                if(choice < 1 || choice > movies.size()) {
+                    System.out.println("Ugyldigt nummer. Prøv igen.");
+                }
+
+                else {
+                    validInput = true;
+                }
             }
 
             catch(NumberFormatException e) {
