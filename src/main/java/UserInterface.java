@@ -9,6 +9,15 @@ public class UserInterface {
     public UserInterface() {
         scanner = new Scanner(System.in);
         controller = new Controller();
+
+        addTestMovies();
+    }
+
+    private void addTestMovies() {
+        controller.addMovie("Slugs", "Juan Piquer Simón",
+                1988, true, 92, "Horror");
+         controller.addMovie("Disgusting Spaceworms Eat Everyone!!", "Geaorge Keller",
+           1989, true, 72, "Sci-Fi/Horror/Comedy");
     }
 
     public void startProgram() {
@@ -77,11 +86,39 @@ public class UserInterface {
             }
         }
 
-        System.out.println("Indtast årstal: ");
-        int yearCreated = Integer.parseInt(scanner.nextLine());
+        int yearCreated = 0;
+        boolean validInput = false;
 
-        System.out.println("Indtast filmens længde i minutter: ");
-        int lengthInMinutes = Integer.parseInt(scanner.nextLine());
+        while(!validInput) {
+            try {
+                System.out.println("Indtast årstal: ");
+                yearCreated = Integer.parseInt(scanner.nextLine());
+
+                validInput = true;
+            }
+            catch(NumberFormatException e) {
+                System.out.println("Det er ikke et heltal. Prøv igen.");
+            }
+        }
+
+
+
+        int lengthInMinutes = 0;
+        boolean validInputLength = false;
+
+        while(!validInputLength) {
+            try {
+                System.out.println("Indtast filmens længde i minutter: ");
+                lengthInMinutes = Integer.parseInt(scanner.nextLine());
+
+                validInputLength = true;
+            }
+
+            catch(NumberFormatException e) {
+                System.out.println("Det er ikke et heltal. Prøv igen.");
+            }
+        }
+
 
         System.out.println("Er filmen i farver? (ja/nej); ");
         String colors = scanner.nextLine();
@@ -136,8 +173,27 @@ public class UserInterface {
             System.out.println((i + 1) + ". " + movies.get(i));
         }
 
-        System.out.println("Vælg film nummer: ");
-        int choice = Integer.parseInt(scanner.nextLine());
+        int choice = 0;
+        boolean validInput = false;
+
+        while(!validInput) {
+            try {
+                System.out.println("Vælg film nummer: ");
+                choice = Integer.parseInt(scanner.nextLine());
+
+                if(choice == 0) {
+                    System.out.println("Redigering afbrudt.");
+                    return;
+                }
+
+                validInput = true;
+            }
+
+            catch(NumberFormatException e) {
+                System.out.println("Det er ikke et heltal. Prøv igen.");
+            }
+        }
+
         Movie selectedMovie = movies.get(choice - 1);
         System.out.println("Du har valgt: \n" + selectedMovie);
 
@@ -154,6 +210,9 @@ public class UserInterface {
         if (!newDirector.isEmpty()) {
             selectedMovie.setDirector(newDirector);
         }
+
+        int choiceYear = 0;
+        boolean validInputYear = false;
 
         System.out.println("Nuværende årstal: " + selectedMovie.getYearCreated());
         System.out.println("Nyt årstal (tryk 'Enter' for at beholde årstal): ");
