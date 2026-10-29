@@ -4,6 +4,6 @@
 |---|---|---|---|
 | F | Man kan søge på en del af en titel | Ja | US4, `MovieCollection.searchMovies` |
 | U |  |  | |
-| R | Programmet går ikke ned ved bogstaver i årstal|Nej – del 6 | |
+| R | Programmet går ikke ned ved bogstaver i årstal| Ja | US10, UserInterface.createMovie() |
 | P | | | |
 | S | | | |
