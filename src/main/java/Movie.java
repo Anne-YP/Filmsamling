@@ -120,12 +120,7 @@ public class Movie {
     public String toString() {
         String colorText = inColor ? "Farver" : "Sort-hvid";
 
-        String watchedText;
-        if (hasBeenWatched()) {
-            watchedText = "Set";
-        } else {
-            watchedText = "Ikke set";
-        }
+        String watchedText = hasBeenWatched() ? "Set" : "Ikke set";
 
         return "Titel: " + title
                 + "\nInstruktør: " + director
