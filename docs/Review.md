@@ -2,15 +2,15 @@
 
 Før I kigger på koden, så kig på, hvad der ellers ligger i repositoriet.
 
-* [ ] Er der en `.gitignore`-fil?
+* [x] Er der en `.gitignore`-fil?
 * [ ] 💣 Er der uvedkommende filer i GitHub (fx `target`-mappen, `.class`-filer, `movies.csv`)?
-* [ ] Er der en `README.md` med fornavn og GitHub-brugernavn på hvert medlem og en forklaring på,
+* [Mangler ] Er der en `README.md` med fornavn og GitHub-brugernavn på hvert medlem og en forklaring på,
   hvordan man kører programmet?
-* [ ] Ligger dokumentation og andet ikke-kode i en `docs`-mappe – både klassediagram og
+* [Mangler] Ligger dokumentation og andet ikke-kode i en `docs`-mappe – både klassediagram og
   `furps.md` (mindst ét krav pr. bogstav)?
-* [ ] Passer klassediagrammet med koden?
-* [ ] Viser historikken commits fra **alle** i gruppen?
-* [ ] Er commit-beskederne til at forstå – kan man se, hvad hver commit gjorde?
+* [Mangler] Passer klassediagrammet med koden?
+* [Mangler] Viser historikken commits fra **alle** i gruppen?
+* [x] Er commit-beskederne til at forstå – kan man se, hvad hver commit gjorde?
 
 ---
 
@@ -45,13 +45,28 @@ diskutér, om navnet er bedre, værre eller lige så godt.
 Gentag dette afsnit for `Movie`, `MovieCollection`, `Controller`, `UserInterface` og `FileHandler`.
 Comparator-klasserne har deres eget afsnit længere nede.
 
-### Klassen: `-navn-`
+### Klassen: `Controller`
 
-* [ ] Er klassen godt navngivet?
-* [ ] Er det let at regne ud, hvilken rolle klassen har?
-* [ ] Er der brugt tydelig ental/flertal for at vise, om klassen indeholder ét eller flere
+* [x] Er klassen godt navngivet?
+* [x] Er det let at regne ud, hvilken rolle klassen har?
+* [x] Er der brugt tydelig ental/flertal for at vise, om klassen indeholder ét eller flere
   underobjekter?
 * [ ] 💣 Er der `System.out` eller `Scanner` i klassen, selv om den ikke er `UserInterface`?
+
+### Klassen: `Movie`
+
+* [x] Er klassen godt navngivet?
+* [x] Er det let at regne ud, hvilken rolle klassen har?
+* [x] Er der brugt tydelig ental/flertal for at vise, om klassen indeholder ét eller flere
+  underobjekter?
+* [ ] 💣 Er der `System.out` eller `Scanner` i klassen, selv om den ikke er `UserInterface`?
+
+### Klassen: `UserInterface`
+
+* [x] Er klassen godt navngivet?
+* [x] Er det let at regne ud, hvilken rolle klassen har?
+* [x] Er der brugt tydelig ental/flertal for at vise, om klassen indeholder ét eller flere
+  underobjekter?
 
 #### Attributter / fields
 
@@ -174,13 +189,13 @@ Reviewes samlet. Hver comparator bør have et navn med den egenskab, den sammenl
 
 ## Tests
 
-* [ ] Er der en testklasse for hver klasse med logik (`Movie`, `MovieCollection`, `FileHandler`,
+* [x] Er der en testklasse for hver klasse med logik (`Movie`, `MovieCollection`, `FileHandler`,
   comparatorerne)?
-* [ ] Er testmetodernes navne sigende – kan man se, hvad der testes, uden at læse koden?
-* [ ] Følger testene Arrange – Act – Assert?
-* [ ] Er de "kedelige" tilfælde testet: tom samling, ingen match, en film, der ikke findes?
-* [ ] Er grænserne testet – fx årstal 1887/1888, en dato præcis på grænsen?
-* [ ] Er det testet, at ugyldige værdier afvises (`assertThrows`)?
+* [x] Er testmetodernes navne sigende – kan man se, hvad der testes, uden at læse koden?
+* [x] Følger testene Arrange – Act – Assert?
+* [Mangler] Er de "kedelige" tilfælde testet: tom samling, ingen match, en film, der ikke findes?
+* [Mangler] Er grænserne testet – fx årstal 1887/1888, en dato præcis på grænsen?
+* [Mangler] Er det testet, at ugyldige værdier afvises (`assertThrows`)?
 * [ ] 💣 Afhænger testene af hinanden eller af den rækkefølge, de køres i?
 * [ ] 💣 Afhænger testene af dagens dato, så de kan blive røde i morgen?
 * [ ] 💣 Kan testene komme til at overskrive eller slette den rigtige `movies.csv`?
