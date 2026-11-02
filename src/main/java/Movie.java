@@ -2,6 +2,8 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class Movie {
+    private static final int FIRST_MOVIE_YEAR = 1888;
+
     private String title;
     private String director;
     private int yearCreated;
@@ -13,17 +15,18 @@ public class Movie {
 
     public Movie(String title, String director, int yearCreated,
                  boolean inColor, int lengthInMinutes, String genre) {
-        this.title = title;
-        this.director = director;
-        this.yearCreated = yearCreated;
-        this.inColor = inColor;
-        this.lengthInMinutes = lengthInMinutes;
-        this.genre = genre;
+        // Setterne tjekker, at værdierne er gyldige.
+        setTitle(title);
+        setDirector(director);
+        setYearCreated(yearCreated);
+        setInColor(inColor);
+        setLengthInMinutes(lengthInMinutes);
+        setGenre(genre);
 
         this.lastWatched = null;
     }
 
-    //Getters
+    // Getters
     public boolean isInColor() {
         return inColor;
     }
@@ -56,16 +59,29 @@ public class Movie {
         return lastWatched;
     }
 
-    //Setters
+    // Setters
     public void setTitle(String title) {
+        if (title == null || title.isBlank()) {
+            throw new IllegalArgumentException("Titlen må ikke være tom.");
+        }
         this.title = title;
     }
 
     public void setDirector(String director) {
+        if (director == null || director.isBlank()) {
+            throw new IllegalArgumentException("Instruktøren må ikke være tom.");
+        }
         this.director = director;
     }
 
     public void setYearCreated(int yearCreated) {
+        int latestYear = LocalDate.now().getYear() + 1;
+
+        if (yearCreated < FIRST_MOVIE_YEAR || yearCreated > latestYear) {
+            throw new IllegalArgumentException(
+                    "Årstallet skal være mellem "
+                            + FIRST_MOVIE_YEAR + " og " + latestYear + ".");
+        }
         this.yearCreated = yearCreated;
     }
 
@@ -74,14 +90,25 @@ public class Movie {
     }
 
     public void setLengthInMinutes(int lengthInMinutes) {
+        if (lengthInMinutes < 1) {
+            throw new IllegalArgumentException(
+                    "Filmlængden skal være mindst 1 minut.");
+        }
         this.lengthInMinutes = lengthInMinutes;
     }
 
     public void setGenre(String genre) {
+        if (genre == null || genre.isBlank()) {
+            throw new IllegalArgumentException("Genre må ikke være tom.");
+        }
         this.genre = genre;
     }
 
     public void markAsWatched(LocalDate date) {
+        if (date == null || date.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException(
+                    "Datoen må ikke være tom eller ligge i fremtiden.");
+        }
         lastWatched = date;
     }
 
@@ -91,25 +118,21 @@ public class Movie {
 
     @Override
     public String toString() {
-
         String colorText = inColor ? "Farver" : "Sort-hvid";
 
         String watchedText;
-        if(hasBeenWatched()) {
+        if (hasBeenWatched()) {
             watchedText = "Set";
-        }
-        else {
+        } else {
             watchedText = "Ikke set";
         }
 
-        return
-                "Titel: " + title +
-                        "\nInstruktør: " + director +
-                        "\nÅr: " + yearCreated +
-                        "\nLængde: " + lengthInMinutes + " minutter" +
-                        "\nGenre: " + genre +
-                        "\nFormat: " + colorText +
-                        "\nStatus: " + watchedText + "\n";
-
+        return "Titel: " + title
+                + "\nInstruktør: " + director
+                + "\nÅr: " + yearCreated
+                + "\nLængde: " + lengthInMinutes + " minutter"
+                + "\nGenre: " + genre
+                + "\nFormat: " + colorText
+                + "\nStatus: " + watchedText + "\n";
     }
 }
