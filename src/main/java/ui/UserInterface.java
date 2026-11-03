@@ -1,3 +1,9 @@
+package ui;
+
+import domainmodel.Controller;
+import domainmodel.Movie;
+
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,19 +19,20 @@ public class UserInterface {
         scanner = new Scanner(System.in);
         controller = new Controller();
 
-        addTestMovies();
+        //addTestMovies();
     }
 
-    private void addTestMovies() {
+    /*private void addTestMovies() {
         controller.addMovie("Slugs", "Juan Piquer Simón",
                 1988, true, 92, "Horror");
-         controller.addMovie("Disgusting Spaceworms Eat Everyone!!", "Geaorge Keller",
+        controller.addMovie("Disgusting Spaceworms Eat Everyone!!", "Geaorge Keller",
            1989, true, 72, "Sci-Fi/Horror/Comedy");
-    }
+    }*/
 
     public void startProgram() {
         boolean running = true;
         System.out.println("Velkommen til min filmsamling!\n");
+        loadMovies();
 
         while(running) {
             showMenu();
@@ -51,6 +58,11 @@ public class UserInterface {
                 markMovieAsWatched();
             }
             else if (choice.equals("0")) {
+                try {
+                    controller.saveMoviesIfChanged();
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
                 running = false;
                 System.out.println("Farvel!");
             }
@@ -185,7 +197,22 @@ public class UserInterface {
         }
     }
 
-    // Ift. ansvarsfordeling er det så ok, at UI har adgang til Movie Arrayliste?
+    private void loadMovies() {
+        try {
+            int count = controller.loadMovies();
+            System.out.println(count + " film er indlæst.");
+            int skipped = controller.getSkippedLineCount();
+            if (skipped > 0) {
+                System.out.println("Advarsel: " + skipped + " linje(r) i filen kunne ikke læses og er sprunget over.");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Der er ingen gemt filmsamling endnu - du starter med en tom samling.");
+        } catch (NullPointerException e) {
+            System.out.println("Der er ingen gemt filmsamling endnu - du starter med en tom samling.");
+        }
+    }
+
+    // Ift. ansvarsfordeling er det så ok, at UI har adgang til domainmodel.Movie Arrayliste?
     private void searchMovies() {
         String searchText = "";
         while(searchText.isEmpty()) {
@@ -495,7 +522,7 @@ public class UserInterface {
                     }
                 }
             }
-            // TODO: Mangler færdige markedAsWatched-metoder i Controller og MovieCollection
+            // TODO: Mangler færdige markedAsWatched-metoder i domainmodel.Controller og domainmodel.MovieCollection
            // controller.markedAsWatched(selectedMovie, watchDate);
             // System.out.println(selectedMovie.getTitle() + " er markeret som set.");
         }
