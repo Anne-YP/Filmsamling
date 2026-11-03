@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -96,7 +97,12 @@ public class UserInterface {
                 System.out.println("Indtast årstal: ");
                 yearCreated = Integer.parseInt(scanner.nextLine());
 
-                validInput = true;
+                if (yearCreated < 1888 || yearCreated > LocalDate.now().getYear() + 1) {
+                    System.out.println("Årstallet skal være mellem 1888 og " + (LocalDate.now().getYear() + 1));
+                }
+                else {
+                    validInput = true;
+                }
             }
             catch(NumberFormatException e) {
                 System.out.println("Det er ikke et heltal. Prøv igen.");
@@ -105,13 +111,17 @@ public class UserInterface {
 
         int lengthInMinutes = 0;
         boolean validInputLength = false;
-
         while(!validInputLength) {
             try {
                 System.out.println("Indtast filmens længde i minutter: ");
                 lengthInMinutes = Integer.parseInt(scanner.nextLine());
 
-                validInputLength = true;
+                if (lengthInMinutes < 1) {
+                    System.out.println("Filmlængden skal være mindst 1 minut.");
+                }
+                else {
+                    validInputLength = true;
+                }
             }
             catch(NumberFormatException e) {
                 System.out.println("Det er ikke et heltal. Prøv igen.");
@@ -120,7 +130,6 @@ public class UserInterface {
 
         boolean inColors = false;
         boolean validColorInput = false;
-
         while(!validColorInput) {
             System.out.println("Er filmen i farver? (ja/nej); ");
             String colors = scanner.nextLine();
@@ -138,21 +147,25 @@ public class UserInterface {
         }
 
         String genre = "";
-        boolean validGenre = false;
-        while (!validGenre) {
+        while (genre.isEmpty() || genre.matches("\\d+")) {
             System.out.println("Indtast filmens genre: ");
             genre = scanner.nextLine();
 
-            if (genre.matches("\\d+")) {
+            if (genre.isEmpty()) {
+                System.out.println("Genre må ikke være tom.");
+            }
+            else if (genre.matches("\\d+")) {
                 System.out.println("Genre må ikke kun bestå af tal.");
-            } else {
-                validGenre = true;
             }
         }
 
-        System.out.println("Filmen " + title + " er blevet tilføjet.");
-
-       controller.addMovie(title, director, yearCreated, inColors, lengthInMinutes, genre);
+        try {
+            controller.addMovie(title, director, yearCreated, inColors, lengthInMinutes, genre);
+            System.out.println("Filmen " + title + " er blevet tilføjet.");
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void showAllMovies() {
@@ -243,8 +256,11 @@ public class UserInterface {
             System.out.println("Ny instruktør (tryk 'Enter' for at beholde instruktør): ");
             String newDirector = scanner.nextLine();
 
-            if (!newDirector.isEmpty()) {
+            if (newDirector.isEmpty()) {
                 validDirectorInput = true;
+            }
+            else if (newDirector.matches("\\d+")) {
+                System.out.println("Instruktør må ikke kun bestå af tal.");
             }
             else {
                 selectedMovie.setDirector(newDirector);
@@ -270,6 +286,9 @@ public class UserInterface {
                 catch (NumberFormatException e) {
                     System.out.println("Det er ikke et heltal. Prøv igen.");
                 }
+                catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
 
@@ -290,6 +309,9 @@ public class UserInterface {
                 catch (NumberFormatException e) {
                     System.out.println("Det er ikke et heltal. Prøv igen.");
                 }
+                catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
 
@@ -302,6 +324,9 @@ public class UserInterface {
 
             if (newGenre.isEmpty()) {
                 validGenreInput = true;
+            }
+            else if (newGenre.matches("\\d+")) {
+                System.out.println("Genre må ikke kun bestå af tal.");
             }
             else {
             selectedMovie.setGenre(newGenre);
