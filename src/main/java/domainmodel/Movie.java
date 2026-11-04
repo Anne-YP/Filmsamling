@@ -29,7 +29,6 @@ public class Movie implements Comparable<Movie> {
         this.lastWatched = null;
     }
 
-    // Getters
     public boolean isInColor() {
         return inColor;
     }
@@ -66,7 +65,6 @@ public class Movie implements Comparable<Movie> {
         return ChronoUnit.DAYS.between(lastWatched, today);
     }
 
-    // Setters
     public void setTitle(String title) {
         if (title == null || title.isBlank()) {
             throw new IllegalArgumentException("Titlen må ikke være tom.");
@@ -153,5 +151,4 @@ public class Movie implements Comparable<Movie> {
                 + "\nFormat: " + colorText
                 + "\nStatus: " + watchedText + "\n";
     }
-
 }

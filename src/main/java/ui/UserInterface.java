@@ -21,7 +21,6 @@ public class UserInterface {
         controller = new Controller();
     }
 
-
     public void startProgram() {
         boolean running = true;
         System.out.println("Velkommen til min filmsamling!\n");
@@ -42,11 +41,7 @@ public class UserInterface {
                 case "7" -> showMoviesNotWatchedForLongTime();
                 case "8" -> showMoviesSortedByChoice();
                 case "0" -> {
-                    try {
-                        controller.saveMoviesIfChanged();
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
+                    saveMovies();
                     running = false;
                     System.out.println("Farvel!");
                 }
@@ -197,7 +192,18 @@ public class UserInterface {
         }
     }
 
-    // Ift. ansvarsfordeling er det så ok, at UI har adgang til domainmodel.Movie Arrayliste?
+    private void saveMovies() {
+        try {
+            if (controller.saveMoviesIfChanged()) {
+                System.out.println("Filmsamlingen er gemt.");
+            } else {
+                System.out.println("Ingen ændringer - intet er gemt.");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Filmsamlingen kunne ikke gemmes: " + e.getMessage());
+        }
+    }
+
     private void searchMovies() {
         String searchText = "";
         while(searchText.isEmpty()) {
@@ -440,77 +446,77 @@ public class UserInterface {
         }
         }
 
-        private void markMovieAsWatched() {
-            System.out.print("Indtast titel: ");
-            String searchText = scanner.nextLine();
+    private void markMovieAsWatched() {
+        System.out.print("Indtast titel: ");
+        String searchText = scanner.nextLine();
 
-            ArrayList<Movie> movies = controller.searchMovies(searchText);
-            if (movies.isEmpty()) {
-                System.out.println("Ingen film fundet.");
-                return;
-            }
-            for (int i = 0; i < movies.size(); i++) {
-                System.out.println((i + 1) + ". " + movies.get(i));
-            }
+        ArrayList<Movie> movies = controller.searchMovies(searchText);
+        if (movies.isEmpty()) {
+            System.out.println("Ingen film fundet.");
+            return;
+        }
+        for (int i = 0; i < movies.size(); i++) {
+            System.out.println((i + 1) + ". " + movies.get(i));
+        }
 
-            int choice = 0;
-            boolean validInput = false;
+        int choice = 0;
+        boolean validInput = false;
 
-            while (!validInput) {
-                try {
-                    System.out.print("Vælg film nummer: ");
-                    choice = Integer.parseInt(scanner.nextLine());
+        while (!validInput) {
+            try {
+                System.out.print("Vælg film nummer: ");
+                choice = Integer.parseInt(scanner.nextLine());
 
-                    if (choice == 0) {
-                        System.out.println("Markering afbrudt.");
-                        return;
-                    }
-                    else if (choice < 1 || choice > movies.size()) {
-                        System.out.println("Ugyldigt nummer. Prøv igen.");
-                    }
-                    else {
-                        validInput = true;
-                    }
+                if (choice == 0) {
+                    System.out.println("Markering afbrudt.");
+                    return;
                 }
-                catch (NumberFormatException e) {
-                    System.out.println("Det er ikke et heltal. Prøv igen.");
-                }
-            }
-
-            Movie selectedMovie = movies.get(choice - 1);
-
-            LocalDate watchDate = null;
-            boolean validDate = false;
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
-            while (!validDate) {
-                System.out.print("Indtast dato (dd-mm-åååå). Tryk 'Enter' for dags dato: ");
-                String dateText = scanner.nextLine();
-
-                if (dateText.isEmpty()) {
-                    watchDate = LocalDate.now();
-                    validDate = true;
+                else if (choice < 1 || choice > movies.size()) {
+                    System.out.println("Ugyldigt nummer. Prøv igen.");
                 }
                 else {
-                    try {
-                        watchDate = LocalDate.parse(dateText, formatter);
-                        if (watchDate.isAfter(LocalDate.now())) {
-                            System.out.println("Datoen må ikke ligge i fremtiden.");
-                        }
-                        else {
-                            validDate = true;
-                        }
-                    }
-                    catch (DateTimeParseException e) {
-                        System.out.println("Ugyldig dato. Prøv igen.");
-                    }
+                    validInput = true;
                 }
             }
-
-           controller.markAsWatched(selectedMovie, watchDate);
-            System.out.println(selectedMovie.getTitle() + " er markeret som set.");
+            catch (NumberFormatException e) {
+                System.out.println("Det er ikke et heltal. Prøv igen.");
+            }
         }
+
+        Movie selectedMovie = movies.get(choice - 1);
+
+        LocalDate watchDate = null;
+        boolean validDate = false;
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        while (!validDate) {
+            System.out.print("Indtast dato (dd-mm-åååå). Tryk 'Enter' for dags dato: ");
+            String dateText = scanner.nextLine();
+
+            if (dateText.isEmpty()) {
+                watchDate = LocalDate.now();
+                validDate = true;
+            }
+            else {
+                try {
+                    watchDate = LocalDate.parse(dateText, formatter);
+                    if (watchDate.isAfter(LocalDate.now())) {
+                        System.out.println("Datoen må ikke ligge i fremtiden.");
+                    }
+                    else {
+                        validDate = true;
+                    }
+                }
+                catch (DateTimeParseException e) {
+                    System.out.println("Ugyldig dato. Prøv igen.");
+                }
+            }
+        }
+
+       controller.markAsWatched(selectedMovie, watchDate);
+        System.out.println(selectedMovie.getTitle() + " er markeret som set.");
+    }
 
     private void showMoviesNotWatchedForLongTime() {
         int days = 0;

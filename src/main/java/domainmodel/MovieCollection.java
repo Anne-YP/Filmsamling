@@ -27,7 +27,6 @@ public class MovieCollection {
         return movies;
     }
 
-
     public ArrayList<Movie> searchMovies(String searchText) {
         ArrayList<Movie> matches = new ArrayList<>();
         String text = searchText.toLowerCase();
@@ -82,51 +81,6 @@ public class MovieCollection {
 
         return result;
     }
-
-    /*public ArrayList<Movie> getMoviesSortedBy(int choice) {
-        if (choice < 1 || choice > 5) {
-            throw new IllegalArgumentException("Ugyldigt sorteringsvalg.");
-        }
-
-        ArrayList<Movie> sortedMovies = new ArrayList<>(movies);
-
-        for (int i = 0; i < sortedMovies.size(); i++) {
-            for (int j = 0; j < sortedMovies.size() - 1; j++) {
-                Movie firstMovie = sortedMovies.get(j);
-                Movie secondMovie = sortedMovies.get(j + 1);
-                boolean swap = false;
-
-                if (choice == 1
-                        && firstMovie.getTitle().compareToIgnoreCase(
-                        secondMovie.getTitle()) > 0) {
-                    swap = true;
-                } else if (choice == 2
-                        && firstMovie.getDirector().compareToIgnoreCase(
-                        secondMovie.getDirector()) > 0) {
-                    swap = true;
-                } else if (choice == 3
-                        && firstMovie.getYearCreated()
-                        > secondMovie.getYearCreated()) {
-                    swap = true;
-                } else if (choice == 4
-                        && firstMovie.getLengthInMinutes()
-                        > secondMovie.getLengthInMinutes()) {
-                    swap = true;
-                } else if (choice == 5
-                        && firstMovie.getGenre().compareToIgnoreCase(
-                        secondMovie.getGenre()) > 0) {
-                    swap = true;
-                }
-
-                if (swap) {
-                    sortedMovies.set(j, secondMovie);
-                    sortedMovies.set(j + 1, firstMovie);
-                }
-            }
-        }
-
-        return sortedMovies;
-    }*/
 
     public ArrayList<Movie> getMoviesSortedByTitle() {
         ArrayList<Movie> sorted = new ArrayList<>(movies);
