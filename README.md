@@ -1,8 +1,15 @@
 # Filmsamling
 
-Et CRUD-program til en filmsamling – 1. semester, datamatiker, EK.
+Et CRUD-program til en personlig filmsamling – 1. semester, datamatiker, EK.
 
-## Gruppen
+## Sådan køres programmet
+Programmet er udviklet og testet med JDK 25 (Eclipse Termurin 25.0.4).
+1. Åbn projektet i IntelliJ IDEA
+2. Sørg for, at projektets SDK er sat til JDK 25. (Bruger alle 25 i gruppen?)
+3. Kør programmets main()-metode i klassen Main.
+4. Programmet starter i konsollen og viser hovedmenuen.
+
+### Gruppen
 
 | Fornavn | GitHub |
 | Anne | Anne-YP |
@@ -12,4 +19,19 @@ Et CRUD-program til en filmsamling – 1. semester, datamatiker, EK.
 
 | Fornavn | GitHub |
 | Iman | imansm01 |
+
+| Fornavn | GitHub |
+| Simon | Simongroendahl |
+
+#### Implementerede User Stories
+- US1 - Opret en film
+- US2 - Menu
+- US3 - Vis alle film
+- US4 - Søg efter film
+- US5 - Redigér en film
+- US6 - Slet en film
+- US7 - Automatiske tests
+- US8 - Markér en film som set
+
+
 
