@@ -83,7 +83,7 @@ public class UserInterface {
                 "4. Redigér en film\n" +
                 "5. Slet en film\n" +
                 "6. Markér en film som set\n" +
-                "7. Vis film sorteret efter ...\n" +
+                "7. Vis film sorteret efter\n" +
                 "0. Afslut");
         System.out.println("Vælg: ");
     }
