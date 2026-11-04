@@ -59,12 +59,12 @@ public class MovieCollection {
         return movies.remove(movie);
     }
 
-    public boolean markAsWatched(Movie movie) {
+    public boolean markAsWatched(Movie movie, LocalDate date) {
         if (!movies.contains(movie)) {
             return false;
         }
 
-        movie.markAsWatched(LocalDate.now());
+        movie.markAsWatched(date);
         return true;
     }
 

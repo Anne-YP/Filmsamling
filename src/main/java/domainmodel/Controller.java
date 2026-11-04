@@ -48,9 +48,9 @@ public class Controller {
         changed = true;
         return movieCollection.deleteMovie(movie);
     }
-    public boolean markAsWatched (Movie movie, LocalDate watchDate) {
+    public boolean markAsWatched (Movie movie, LocalDate date) {
         changed = true;
-        return movieCollection.markAsWatched(movie);
+        return movieCollection.markAsWatched(movie, date);
     }
 
     public ArrayList<Movie> getMoviesNotWatchedForDays(int days) {
