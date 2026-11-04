@@ -31,7 +31,16 @@ Programmet er udviklet og testet med JDK 25 (Eclipse Termurin 25.0.4).
 - US5 - Redigér en film
 - US6 - Slet en film
 - US7 - Automatiske tests
-- US8 - Markér en film som set
+- US8 - Markér en film som set (IKKE FÆRDIG - MANGLER PUNKT 2 - Ida)
+- US9 - Film, jeg ikke har set længe (IKKE FÆRDIG - Del 5 datoer - Iman)
+- US10 - Robust input
+- US11 - Kun gyldige film
+- US12 - Angiv datoen, jeg så filmen 
+- US13 - Gem samlingen (punkt 5 færdig?)
+- US14 - Gem kun, når der er ændringer (FÆRDIG?)
+- US15 - Lag i koden
+- US16 - Alfabetisk visning (IKKE FÆRDIG - MANGLER NYE KLASSER)
+- US17 - Vælg, hvad der sorteres efter (IKKE FÆRDIG - MANGLER NYE KLASSER)
 
 
 
