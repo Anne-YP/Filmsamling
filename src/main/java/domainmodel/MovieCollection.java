@@ -2,6 +2,8 @@ package domainmodel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class MovieCollection {
     private ArrayList<Movie> movies;
@@ -22,7 +24,7 @@ public class MovieCollection {
     }
 
     public ArrayList<Movie> getMovies() {
-        return getMoviesSortedBy(1);
+        return movies;
     }
 
 
@@ -81,7 +83,7 @@ public class MovieCollection {
         return result;
     }
 
-    public ArrayList<Movie> getMoviesSortedBy(int choice) {
+    /*public ArrayList<Movie> getMoviesSortedBy(int choice) {
         if (choice < 1 || choice > 5) {
             throw new IllegalArgumentException("Ugyldigt sorteringsvalg.");
         }
@@ -124,5 +126,17 @@ public class MovieCollection {
         }
 
         return sortedMovies;
+    }*/
+
+    public ArrayList<Movie> getMoviesSortedByTitle() {
+        ArrayList<Movie> sorted = new ArrayList<>(movies);
+        Collections.sort(sorted);
+        return sorted;
+    }
+
+    public ArrayList<Movie> getMoviesSorted(Comparator<Movie> comparator) {
+        ArrayList<Movie> sorted = new ArrayList<>(movies);
+        sorted.sort(comparator);
+        return sorted;
     }
 }

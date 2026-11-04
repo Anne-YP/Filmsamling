@@ -5,6 +5,7 @@ import datasource.FileHandler;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Controller {
    private MovieCollection movieCollection;
@@ -29,8 +30,22 @@ public class Controller {
         return movieCollection.getMovies();
     }
 
-    public ArrayList<Movie> getMoviesSortedBy(int choice) {
-        return movieCollection.getMoviesSortedBy(choice);
+    public ArrayList<Movie> getMoviesSortedBy(SortField field) {
+        return movieCollection.getMoviesSorted(comparatorFor(field));
+    }
+
+    public ArrayList<Movie> getMoviesSortedByTitle() {
+        return movieCollection.getMoviesSortedByTitle();
+    }
+
+    private Comparator<Movie> comparatorFor(SortField field) {
+        return switch (field) {
+            case TITLE -> new TitleComparator();
+            case DIRECTOR -> new DirectorComparator();
+            case YEAR -> new YearComparator();
+            case LENGTH -> new LengthComparator();
+            case GENRE -> new GenreComparator();
+        };
     }
 
     public ArrayList<Movie> searchMovies(String searchText) {
