@@ -65,6 +65,17 @@ public class MovieCollection {
         return movies.remove(movie);
     }
 
+    public boolean markAsWatched(Movie movie) {
+        if(!movies.contains(movie)) {
+            return false;
+        }
+
+        movie.markAsWatched(LocalDate.now());
+        return true;
+
+    }
+
+
     public ArrayList<Movie> getMoviesNotWatchedSince(LocalDate date) {
         ArrayList<Movie> result = new ArrayList<>();
 
@@ -77,6 +88,7 @@ public class MovieCollection {
 
         return result;
     }
+
 
 
 //   domainmodel.Movie movie1 = new domainmodel.Movie("Tourist Trap", "David Schmoeller",
