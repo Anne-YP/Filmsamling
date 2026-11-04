@@ -57,6 +57,10 @@ public class UserInterface {
             else if (choice.equals("6")) {
                 markMovieAsWatched();
             }
+            else if (choice.equals("7")) {
+                showMoviesSortedByChoice();
+            }
+
             else if (choice.equals("0")) {
                 try {
                     controller.saveMoviesIfChanged();
@@ -79,6 +83,7 @@ public class UserInterface {
                 "4. Redigér en film\n" +
                 "5. Slet en film\n" +
                 "6. Markér en film som set\n" +
+                "7. Vis film sorteret efter ...\n" +
                 "0. Afslut");
         System.out.println("Vælg: ");
     }
@@ -526,4 +531,41 @@ public class UserInterface {
            // controller.markedAsWatched(selectedMovie, watchDate);
             // System.out.println(selectedMovie.getTitle() + " er markeret som set.");
         }
+    private void showMoviesSortedByChoice() {
+        System.out.println("Sortér efter:");
+        System.out.println("1. Titel");
+        System.out.println("2. Instruktør");
+        System.out.println("3. Årstal");
+        System.out.println("4. Længde");
+        System.out.println("5. Genre");
+
+        int sortChoice = 0;
+
+        while (sortChoice < 1 || sortChoice > 5) {
+            System.out.println("Vælg et tal fra 1 til 5:");
+            String input = scanner.nextLine();
+
+            try {
+                sortChoice = Integer.parseInt(input);
+
+                if (sortChoice < 1 || sortChoice > 5) {
+                    System.out.println("Vælg et tal fra 1 til 5.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Skriv et tal fra 1 til 5.");
+            }
+        }
+
+        ArrayList<Movie> movies = controller.getMoviesSortedBy(sortChoice);
+
+        if (movies.isEmpty()) {
+            System.out.println("Listen er tom.");
+            return;
+        }
+
+        for (Movie movie : movies) {
+            System.out.println(movie);
+        }
     }
+    }
+

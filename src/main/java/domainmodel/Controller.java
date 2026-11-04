@@ -30,6 +30,10 @@ public class Controller {
         return movieCollection.getMovies();
     }
 
+    public ArrayList<Movie> getMoviesSortedBy(int choice) {
+        return movieCollection.getMoviesSortedBy(choice);
+    }
+
     public ArrayList<Movie> searchMovies(String searchText) {
         return movieCollection.searchMovies(searchText);
     }
