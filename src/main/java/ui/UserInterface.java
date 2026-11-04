@@ -39,7 +39,7 @@ public class UserInterface {
                 case "4" -> editMovie();
                 case "5" -> deleteMovie();
                 case "6" -> markMovieAsWatched();
-                case "7" -> System.out.println("indsæt FilmJegIkkeHarSetLænge her.");
+                case "7" -> showMoviesNotWatchedForLongTime();
                 case "8" -> showMoviesSortedByChoice();
                 case "0" -> {
                     try {
@@ -511,6 +511,40 @@ public class UserInterface {
            controller.markAsWatched(selectedMovie, watchDate);
             System.out.println(selectedMovie.getTitle() + " er markeret som set.");
         }
+
+    private void showMoviesNotWatchedForLongTime() {
+        int days = 0;
+        boolean validInput = false;
+
+        while (!validInput) {
+            try {
+                System.out.println("Indtast antal dage: ");
+                days = Integer.parseInt(scanner.nextLine());
+
+                if (days < 0) {
+                    System.out.println("Antal dage må ikke være negativt.");
+                }
+                else {
+                    validInput = true;
+                }
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Det er ikke et heltal. Prøv igen.");
+            }
+        }
+
+        ArrayList<Movie> movies = controller.getMoviesNotWatchedForDays(days);
+
+        if (movies.isEmpty()) {
+            System.out.println("Ingen film fundet.");
+            return;
+        }
+        System.out.println("\nFilm du ikke har set længe:\n");
+
+        for (Movie movie : movies) {
+            System.out.println(movie);
+        }
+    }
 
     private void showMoviesSortedByChoice() {
         System.out.println("Sortér efter:");
