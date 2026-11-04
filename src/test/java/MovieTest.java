@@ -243,7 +243,7 @@ class MovieTest {
 
         String expected = "Titel: Slugs\n" + "Instruktør: Juan Piquer Simón\n"
                 + "År: 1988\n" + "Længde: 92 minutter\n" + "Genre: Horror\n"
-                + "Format: Farver\n" + "Status: Ikke set\n";
+                + "Format: Farver\n" + "Sidst set: Aldrig\n";
 
         assertEquals(expected, movie.toString());
     }
@@ -268,8 +268,32 @@ class MovieTest {
                         "Længde: 92 minutter\n" +
                         "Genre: Horror\n" +
                         "Format: Farver\n" +
-                        "Status: Set\n";
+                        "Sidst set: 04-11-2026 (for 0 dage siden)\n";
 
         assertEquals(expected, movie.toString());
+    }
+
+    @Test
+    void naturalOrderPutsEarlierTitleFirst() {
+        Movie alien = new Movie("Alien", "Ridley Scott", 1979, true, 117, "Horror");
+        Movie jaws = new Movie("Jaws", "Steven Spielberg", 1975, true, 124, "Thriller");
+
+        assertTrue(alien.compareTo(jaws) < 0);
+    }
+
+    @Test
+    void naturalOrderPutsLaterTitleAfter() {
+        Movie alien = new Movie("Alien", "Ridley Scott", 1979, true, 117, "Horror");
+        Movie jaws = new Movie("Jaws", "Steven Spielberg", 1975, true, 124, "Thriller");
+
+        assertTrue(jaws.compareTo(alien) > 0);
+    }
+
+    @Test
+    void naturalOrderIgnoresCase() {
+        Movie uppercase = new Movie("Alien", "Ridley Scott", 1979, true, 117, "Horror");
+        Movie lowercase = new Movie("alien", "Ridley Scott", 1979, true, 117, "Horror");
+
+        assertEquals(0, uppercase.compareTo(lowercase));
     }
 }

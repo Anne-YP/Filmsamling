@@ -170,7 +170,16 @@ public class UserInterface {
 
         ArrayList<Movie> movies = controller.getMoviesSortedByTitle();
         for (Movie m: movies) {
-            System.out.println(m);
+            System.out.println(m.getTitle() + " " + "(" + m.getYearCreated() + ")");
+            System.out.println("> " + "Instruktør: " + m.getDirector());
+            System.out.println("> " + "Genre: " + m.getGenre());
+            System.out.println("> " + "Længde: " + m.getLengthInMinutes() + " minutter");
+            if(m.isInColor()) {
+                System.out.println("> " + "Format: Farvefilm");
+            } else {
+                System.out.println("> " + "Format: Sort/hvid film");
+            }
+            System.out.println("");
         }
         if (movies.isEmpty()) {
             System.out.println("Listen er tom.");

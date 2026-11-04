@@ -129,15 +129,14 @@ public class Movie implements Comparable<Movie> {
         String watchedText;
 
         if(!hasBeenWatched()) {
-            watchedText = "Ikke set";
+            watchedText = "Aldrig";
         }
         else {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
             long daysSince = getDaysSinceWatched(LocalDate.now());
 
-            watchedText = "Sidst set: "
-                    + lastWatched.format(formatter)
+            watchedText = lastWatched.format(formatter)
                     + " (for "
                     + daysSince
                     + " dage siden)";
@@ -149,6 +148,6 @@ public class Movie implements Comparable<Movie> {
                 + "\nLængde: " + lengthInMinutes + " minutter"
                 + "\nGenre: " + genre
                 + "\nFormat: " + colorText
-                + "\nStatus: " + watchedText + "\n";
+                + "\nSidst set: " + watchedText + "\n";
     }
 }
