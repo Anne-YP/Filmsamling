@@ -11,7 +11,6 @@ public class Controller {
    private FileHandler fileHandler;
    boolean changed;
 
-   // TODO - US13 (kører pt. test med en .txt fil
 
     public Controller() {
         movieCollection = new MovieCollection();
@@ -49,7 +48,7 @@ public class Controller {
         changed = true;
         return movieCollection.deleteMovie(movie);
     }
-    public boolean markAsWatched (Movie movie) {
+    public boolean markAsWatched (Movie movie, LocalDate watchDate) {
         changed = true;
         return movieCollection.markAsWatched(movie);
     }

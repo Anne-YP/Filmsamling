@@ -17,7 +17,7 @@ public class Movie {
 
     public Movie(String title, String director, int yearCreated,
                  boolean inColor, int lengthInMinutes, String genre) {
-        // Setterne tjekker, at værdierne er gyldige.
+
         setTitle(title);
         setDirector(director);
         setYearCreated(yearCreated);

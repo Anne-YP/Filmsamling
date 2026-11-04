@@ -19,15 +19,8 @@ public class UserInterface {
         scanner = new Scanner(System.in);
         controller = new Controller();
 
-        //addTestMovies();
     }
 
-    /*private void addTestMovies() {
-        controller.addMovie("Slugs", "Juan Piquer Simón",
-                1988, true, 92, "Horror");
-        controller.addMovie("Disgusting Spaceworms Eat Everyone!!", "Geaorge Keller",
-           1989, true, 72, "Sci-Fi/Horror/Comedy");
-    }*/
 
     public void startProgram() {
         boolean running = true;
@@ -527,9 +520,9 @@ public class UserInterface {
                     }
                 }
             }
-            // TODO: Mangler færdige markedAsWatched-metoder i domainmodel.Controller og domainmodel.MovieCollection
-           // controller.markedAsWatched(selectedMovie, watchDate);
-            // System.out.println(selectedMovie.getTitle() + " er markeret som set.");
+
+           controller.markAsWatched(selectedMovie, watchDate);
+            System.out.println(selectedMovie.getTitle() + " er markeret som set.");
         }
     private void showMoviesSortedByChoice() {
         System.out.println("Sortér efter:");
