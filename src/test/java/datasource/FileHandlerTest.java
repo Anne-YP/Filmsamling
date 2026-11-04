@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -44,6 +45,8 @@ class FileHandlerTest {
 
         // Assert
         assertEquals(2, loaded.size());
+        assertEquals("Adams æbler", loaded.get(0).getTitle());
+        assertEquals("Jaws", loaded.get(1).getTitle());
     }
 
     @Test
@@ -60,20 +63,36 @@ class FileHandlerTest {
 
     }
 
-    // Test 3: Indlæs en fil, der ikke findes
-    // Test 4: Ødelagte linjer
-
-    @Disabled
     @Test
     void loadNonExistingFile() {
         // Arrange
+        FileHandler fileHandler = new FileHandler("does-not-exist.csv");
 
-        // Act
-        // Assert
+        // Act + Assert
+        assertThrows(FileNotFoundException.class, () -> fileHandler.loadMovies());
     }
 
-    @Disabled
     @Test
-    void getSkippedLineCount() {
+    void getSkippedLineCount() throws FileNotFoundException {
+        // Arrange
+        PrintStream output = new PrintStream(new File(TEST_FILE));
+
+        output.println("title;director;yearCreated;InColor;lengthInMinutes;genre;lastWatched");
+
+        output.println("Jaws;Steven Spielberg;1975;false;124;Thriller;");
+
+        output.println("ForkertData");
+        output.println("Alien;Ridley Scott");
+        output.close();
+
+        FileHandler fileHandler = new FileHandler(TEST_FILE);
+
+        // Act
+        ArrayList<Movie> movies = fileHandler.loadMovies();
+
+        // Assert
+        assertEquals(1, movies.size());
+
+        assertEquals(2, fileHandler.getSkippedLineCount());
     }
 }
