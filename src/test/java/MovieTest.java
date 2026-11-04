@@ -237,8 +237,39 @@ class MovieTest {
         assertEquals(6L, movie.getDaysSinceWatched(LocalDate.of(2026, 10, 26)));
     }
 
-    @Disabled
     @Test
     void testToString() {
+        Movie movie = new Movie("Slugs", "Juan Piquer Simón", 1988, true, 92, "Horror");
+
+        String expected = "Titel: Slugs\n" + "Instruktør: Juan Piquer Simón\n"
+                + "År: 1988\n" + "Længde: 92 minutter\n" + "Genre: Horror\n"
+                + "Format: Farver\n" + "Status: Ikke set\n";
+
+        assertEquals(expected, movie.toString());
+    }
+
+    @Test
+    void testToStringWatchedMovie()
+    {
+        Movie movie = new Movie(
+                "Slugs",
+                "Juan Piquer Simón",
+                1988,
+                true,
+                92,
+                "Horror");
+
+        movie.markAsWatched(LocalDate.now());
+
+        String expected =
+                "Titel: Slugs\n" +
+                        "Instruktør: Juan Piquer Simón\n" +
+                        "År: 1988\n" +
+                        "Længde: 92 minutter\n" +
+                        "Genre: Horror\n" +
+                        "Format: Farver\n" +
+                        "Status: Set\n";
+
+        assertEquals(expected, movie.toString());
     }
 }
