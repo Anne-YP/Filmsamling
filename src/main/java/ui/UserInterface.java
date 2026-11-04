@@ -262,7 +262,7 @@ public class UserInterface {
 
         String updatedTitle = selectedMovie.getTitle();
         String updatedDirector = selectedMovie.getDirector();
-        int updatedYear = selectedMovie.getLengthInMinutes();
+        int updatedYear = selectedMovie.getYearCreated();
         int updatedLength = selectedMovie.getLengthInMinutes();
         String updatedGenre = selectedMovie.getGenre();
         boolean updatedInColor = selectedMovie.isInColor();

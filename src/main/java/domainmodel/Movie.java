@@ -1,6 +1,7 @@
 package domainmodel;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Movie implements Comparable<Movie> {
@@ -61,6 +62,10 @@ public class Movie implements Comparable<Movie> {
         return lastWatched;
     }
 
+    public long getDaysSinceWatched(LocalDate today) {
+        return ChronoUnit.DAYS.between(lastWatched, today);
+    }
+
     // Setters
     public void setTitle(String title) {
         if (title == null || title.isBlank()) {
@@ -114,10 +119,6 @@ public class Movie implements Comparable<Movie> {
         lastWatched = date;
     }
 
-    public long getDaysSinceWatched(LocalDate today) {
-        return ChronoUnit.DAYS.between(lastWatched, today);
-    }
-
     @Override
     public int compareTo(Movie other) {
         return title.compareToIgnoreCase(other.title);
@@ -127,7 +128,22 @@ public class Movie implements Comparable<Movie> {
     public String toString() {
         String colorText = inColor ? "Farver" : "Sort-hvid";
 
-        String watchedText = hasBeenWatched() ? "Set" : "Ikke set";
+        String watchedText;
+
+        if(!hasBeenWatched()) {
+            watchedText = "Ikke set";
+        }
+        else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+            long daysSince = getDaysSinceWatched(LocalDate.now());
+
+            watchedText = "Sidst set: "
+                    + lastWatched.format(formatter)
+                    + " (for "
+                    + daysSince
+                    + " dage siden)";
+        }
 
         return "Titel: " + title
                 + "\nInstruktør: " + director
@@ -137,4 +153,5 @@ public class Movie implements Comparable<Movie> {
                 + "\nFormat: " + colorText
                 + "\nStatus: " + watchedText + "\n";
     }
+
 }
